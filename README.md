@@ -136,3 +136,17 @@ Recommended OSes for the virtual machine:
     * KDE Neon
 
 # Set up simple web application
+
+This repository contains the web app that we are going to deploy on the virtual machine
+
+It is a simple nodejs web app that contains a single endpoint ```GET /hello. It also serves static content such as html, css, etc...
+
+To run the app first you must have installed node and npm on the virtual machine where we are going to deploy the web app, and then:
+
+```bash
+cd web-app
+npm install
+npm start
+```
+
+You can also change the index page located in ```public/index.html```
