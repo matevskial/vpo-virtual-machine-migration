@@ -80,8 +80,47 @@ network:
 ```
 
 You should replace ```enp8s0``` with whatever is the name of your ethernet interface.
+
 You should replace ```adderesses```, ```gateway4``` and ```nameservers: addresses``` with your network settings.
+
 Each host(kvm1 and kvm2) will have different static IP address.
+
+Then apply the network configuration:
+
+```bash
+sudo netplan apply
+```
+
+You can check current network configuration to ensure the bridge ```br0``` is working
+
+```bash
+sudo networkctl status -a
+```
+
+When above command is executed, you should see something like the following output after scrolling to the information for the bridge:
+```bash
+● 5: br0
+               Link File: /usr/lib/systemd/network/99-default.link
+            Network File: /run/systemd/network/10-netplan-br0.network
+                    Type: bridge
+                   State: routable (configured)
+                  Driver: bridge
+              HW Address: 12:35:z6:be:63:5b
+                     MTU: 1500 (min: 68, max: 65535)
+           Forward Delay: 15s
+              Hello Time: 2s
+                 Max Age: 20s
+             Ageing Time: 5min
+                Priority: 32768
+                     STP: no
+  Multicast IGMP Version: 2
+    Queue Length (Tx/Rx): 1/1
+                 Address: 192.168.0.28
+                          fe80::908f:84ff:fea7:1acb
+                 Gateway: 192.168.0.1
+                     DNS: 217.16.82.92
+                          217.16.82.93
+```
 
 # Set up a virtual machine on one host(example on host kvm1)
 
