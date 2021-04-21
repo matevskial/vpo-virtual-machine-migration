@@ -16,11 +16,32 @@ First we will setup 2 hosts with following requirements
     * OS: Ubuntu 20.04 or KDE Neon 20.04
     * static IP(for example ```192.168.0.28```)
     * hostname ```kvm1```
+	* will have nfs that will share only the directory ```/var/lib/libvirt/images```
 
 * Host 2:
     * OS: Ubuntu 20.04 or KDE Neon 20.04
     * static IP(for example ```192.168.0.29```)
     * hostname ```kvm2```
+
+## Set up shared directory
+
+To do a migration of a virtual machine, both host need  to access a shared directory that will be a disk pool for KVM, and it can be done with nfs server.
+
+Only one of the hosts need to have nfs server installed, so on one host setup the nfs server:
+
+```bash
+sudo apt install nfs-kernel-server
+```
+
+Then, edit ```/etc/exports``` to specify a shared directory with the following content:
+
+```
+/home/user/libvirt/images 192.168.0.1/24(rw,no_root_squash)
+```
+
+Replace the user name and the IP address of hosts that will be able to access the directory with your configuration.
+
+## Install virtualization software
 
 Then, on each host, we will install kvm and qemu
 
@@ -54,6 +75,8 @@ TriggeredBy: ● libvirtd-ro.socket
 
 апр 20 14:50:56 kvm1 dnsmasq[1431]: using nameserver 127.0.0.53#53
 ```
+
+## Set up a bridge network
 
 Next, you should set up a network bridge that virtual machines will use to access the internet
 
@@ -122,7 +145,17 @@ When above command is executed, you should see something like the following outp
                           217.16.82.93
 ```
 
-# Set up a virtual machine on one host(example on host kvm1)
+On the other hosts, its enough to install only ```nfs-common```
+
+```bash
+sudo apt install nfs-common
+```
+
+## Add storage pool with virt-manager(on both hosts)
+
+Use virt-manager to add the shared directory as storage pool.
+
+# Set up a virtual machine on one host(example on host kvm1) with virt-manager
 
 You can use the GUI tool to create and start a virtual machine
 
@@ -150,3 +183,7 @@ npm start
 ```
 
 You can also change the index page located in ```public/index.html```
+
+# Make the migration
+
+
