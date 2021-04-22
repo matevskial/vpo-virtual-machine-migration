@@ -184,10 +184,23 @@ This repository contains the web app that we are going to deploy on the virtual 
 
 It is a simple nodejs web app that contains a single endpoint ```GET /hello. It also serves static content such as html, css, etc...
 
-To run the app first you must have installed node and npm on the virtual machine where we are going to deploy the web app, and then:
+To run the app first you must have installed node and npm on the virtual machine where we are going to deploy the web app:
+
+If you have installed Alpine Linux:
+```bash
+apk add nodejs npm
+```
+
+For Ubuntu:
+```bash
+sudo apt install nodejs npm
+```
+
+Then clone this repository and start the web application:
 
 ```bash
-cd web-app
+git clone https://github.com/matevskial/vpo-virtual-machine-migration.git
+cd vpo-virtual-machine-migration/web-app
 npm install
 npm start
 ```
