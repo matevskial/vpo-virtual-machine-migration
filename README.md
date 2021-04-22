@@ -173,9 +173,10 @@ sudo virt-manager
 ```
 
 Recommended OSes for the virtual machine:
+	* Alpine Linux extended
     * Ubuntu Server 20.04
-    * Ubuntu Desktop 20.04
-    * KDE Neon
+
+You should also configure the CPU model to not copy host CPU configuration, but set the model as kvm64
 
 # Set up simple web application
 
