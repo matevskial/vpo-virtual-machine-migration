@@ -16,7 +16,7 @@ First we will setup 2 hosts with following requirements
     * OS: Ubuntu 20.04 or KDE Neon 20.04
     * static IP(for example ```192.168.0.28```)
     * hostname ```kvm1```
-	* will have nfs that will share only the directory ```/var/lib/libvirt/images```
+	* will have nfs that will share only the directory ```/home/user/libvirt/images``` (```user``` is your username)
 
 * Host 2:
     * OS: Ubuntu 20.04 or KDE Neon 20.04
@@ -33,6 +33,14 @@ Only one of the hosts need to have nfs server installed, so on one host setup th
 sudo apt install nfs-kernel-server
 ```
 
+Create the folder ```/home/user/libvirt/images``` if it doesn't exist:
+
+```bash
+mkdir -p /home/user/libvirt/images```
+```
+
+Replace ```user``` with your username.
+
 Then, edit ```/etc/exports``` to specify a shared directory with the following content:
 
 ```
@@ -41,9 +49,15 @@ Then, edit ```/etc/exports``` to specify a shared directory with the following c
 
 Replace the user name and the IP address of hosts that will be able to access the directory with your configuration.
 
+On the other hosts, its enough to install only ```nfs-common```
+
+```bash
+sudo apt install nfs-common
+```
+
 ## Install virtualization software
 
-Then, on each host, we will install kvm and qemu
+On each host, we will install kvm and qemu
 
 ```bash
 sudo apt update
@@ -145,11 +159,6 @@ When above command is executed, you should see something like the following outp
                           217.16.82.93
 ```
 
-On the other hosts, its enough to install only ```nfs-common```
-
-```bash
-sudo apt install nfs-common
-```
 
 ## Add storage pool with virt-manager(on both hosts)
 
