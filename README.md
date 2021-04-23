@@ -209,4 +209,44 @@ You can also change the index page located in ```public/index.html```
 
 # Make the migration
 
+Now once the virtual machine runs on one host(lets say ```kvm1```) it is possible to migrate it to another host
+
+First lets list running virtual machines on host ```kvm1```:
+
+```bash
+user@kvm1:~$ virsh list
+ Id   Name             State
+--------------------------------
+ 4    alpinelinux      running
+```
+
+On ```kvm2```, this virtual machine shouldn't be running:
+
+```bash
+user@kvm2:~$ virsh list
+ Id   Name             State
+--------------------------------
+```
+
+To to the migration from host ```kvm1``` to host ```kvm2```, execute the following command:
+
+```bash
+virsh migrate --live alpinelinux qemu+ssh://192.168.0.29/system tcp://192.168.0.29
+```
+
+This command specifies which running virtual machine to migrate(```alpinelinux```),
+what is the URI of the target(```qemu+ssh://192.168.0.29/system```)
+and what is 
+
+If the command executes successfully, you should see the virtual machine running on ```kvm2```:
+
+```bash
+user@kvm2:~$ virsh list
+ Id   Name             State
+--------------------------------
+ 4    alpinelinux      running
+```
+
+# Gotchas
+
 
