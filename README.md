@@ -184,19 +184,19 @@ This repository contains the web app that we are going to deploy on the virtual 
 
 It is a simple nodejs web app that contains a single endpoint ```GET /hello. It also serves static content such as html, css, etc...
 
-To run the app first you must have installed node and npm on the virtual machine where we are going to deploy the web app:
+To run the app first you must have installed development tools such as git, node and npm on the virtual machine where we are going to deploy the web app:
 
 If you have installed Alpine Linux:
 ```bash
-apk add nodejs npm
+apk add nodejs npm git
 ```
 
 For Ubuntu:
 ```bash
-sudo apt install nodejs npm
+sudo apt install nodejs npm git
 ```
 
-Then clone this repository and start the web application:
+Then clone this repository using git and start the web application using npm:
 
 ```bash
 git clone https://github.com/matevskial/vpo-virtual-machine-migration.git
@@ -247,6 +247,9 @@ user@kvm2:~$ virsh list
  4    alpinelinux      running
 ```
 
-# Gotchas
+# Remarks
 
-
+In order to achieve live migrations, we did several things slightly different:
+	* we installed the nfs server on one of the two hosts instead of a third host
+	* we had to change the CPU configuration for the created virtual machine in order to make the migration between the two hosts possible
+	* we used alpine linux instead of ubuntu, since it was smaller and convenient for the demonstration
