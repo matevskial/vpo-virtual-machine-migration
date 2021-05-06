@@ -36,7 +36,7 @@ sudo apt install nfs-kernel-server
 Create the folder ```/home/user/libvirt/images``` if it doesn't exist:
 
 ```bash
-mkdir -p /home/user/libvirt/images```
+mkdir -p /home/user/libvirt/images
 ```
 
 Replace ```user``` with your username.
