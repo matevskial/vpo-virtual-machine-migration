@@ -251,8 +251,8 @@ user@kvm2:~$ virsh list
 
 In order to achieve live migrations, we did several things slightly different:
 
-	* we installed the nfs server on one of the two hosts instead of a third host
+* we installed the nfs server on one of the two hosts instead of a third host
 
-	* we had to change the CPU configuration for the created virtual machine in order to make the migration between the two hosts possible
+* we had to change the CPU configuration for the created virtual machine in order to make the migration between the two hosts possible
 
-	* we used alpine linux instead of ubuntu, since it was smaller and convenient for the demonstration
+* we used alpine linux instead of ubuntu, since it was smaller and convenient for the demonstration
